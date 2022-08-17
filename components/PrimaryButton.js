@@ -5,27 +5,41 @@ function PrimaryButton ({ children }) {
     console.log('Pressed')
   }
   return (
-    <Pressable onPress={pressHandler} android_ripple={{ color: '#640233' }}>
-      <View style={styles.buttonContainer}>
+    <View style={styles.buttonOuterContainer}>
+      <Pressable
+        style={({ pressed }) =>
+          pressed
+            ? [styles.buttonInnerContainer, styles.pressed]
+            : styles.buttonInnerContainer
+        }
+        onPress={pressHandler}
+        android_ripple={{ color: '#640233' }}
+      >
         <Text style={styles.buttonText}>{children}</Text>
-      </View>
-    </Pressable>
+      </Pressable>
+    </View>
   )
 }
 
 export default PrimaryButton
 
 const styles = StyleSheet.create({
-  buttonContainer: {
-    backgroundColor: '#72063c',
+  buttonOuterContainer: {
     borderRadius: 28,
+    margin: 4,
+    overflow: 'hidden'
+  },
+  buttonInnerContainer: {
+    backgroundColor: '#72063c',
     paddingVertical: 8,
     paddingHorizontal: 16,
-    elevation: 2,
-    margin: 4
+    elevation: 2
   },
   buttonText: {
     color: 'white',
     textAlign: 'center'
+  },
+  pressed: {
+    opacity: 0.75 // 25% transparent & 75% opaque
   }
 })
