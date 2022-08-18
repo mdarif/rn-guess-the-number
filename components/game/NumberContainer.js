@@ -4,7 +4,7 @@ import Colors from '../../constants/colors'
 function NumberContainer ({ children }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.NumberContainer}>{children}</Text>
+      <Text style={styles.numberText}>{children}</Text>
     </View>
   )
 }
