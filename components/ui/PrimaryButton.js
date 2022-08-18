@@ -1,5 +1,6 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native'
-import Colors from '../constants/colors'
+
+import Colors from '../../constants/colors'
 
 function PrimaryButton ({ children, onPress }) {
   return (
@@ -38,6 +39,6 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   pressed: {
-    opacity: 0.75 // 25% transparent & 75% opaque
+    opacity: 0.75
   }
 })

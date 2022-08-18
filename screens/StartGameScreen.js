@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { TextInput, View, StyleSheet, Alert } from 'react-native'
-import PrimaryButton from '../components/PrimaryButton'
+
+import PrimaryButton from '../components/ui/PrimaryButton'
 import Colors from '../constants/colors'
 
 function StartGameScreen ({ onPickNumber }) {
@@ -10,7 +11,7 @@ function StartGameScreen ({ onPickNumber }) {
     setEnteredNumber(enteredText)
   }
 
-  function resetInput () {
+  function resetInputHandler () {
     setEnteredNumber('')
   }
 
@@ -20,17 +21,12 @@ function StartGameScreen ({ onPickNumber }) {
     if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
       Alert.alert(
         'Invalid number!',
-        'Number has to be a number between 1 to 99',
-        [
-          {
-            text: 'Okay',
-            style: 'destructive',
-            onPress: resetInput
-          }
-        ]
+        'Number has to be a number between 1 and 99.',
+        [{ text: 'Okay', style: 'destructive', onPress: resetInputHandler }]
       )
       return
     }
+
     onPickNumber(chosenNumber)
   }
 
@@ -42,12 +38,12 @@ function StartGameScreen ({ onPickNumber }) {
         keyboardType='number-pad'
         autoCapitalize='none'
         autoCorrect={false}
-        value={enteredNumber}
         onChangeText={numberInputHandler}
+        value={enteredNumber}
       />
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={resetInput}>Reset</PrimaryButton>
+          <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
         </View>
         <View style={styles.buttonContainer}>
           <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
@@ -62,14 +58,14 @@ export default StartGameScreen
 const styles = StyleSheet.create({
   inputContainer: {
     justifyContent: 'center',
-    alignItems: 'center', //default was stretch
-    padding: 16,
+    alignItems: 'center',
     marginTop: 100,
     marginHorizontal: 24,
+    padding: 16,
     backgroundColor: Colors.primary800,
     borderRadius: 8,
-    elevation: 4, // Android shadow
-    shadowColor: 'black', // iOS Shadow properties
+    elevation: 4,
+    shadowColor: 'black',
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 6,
     shadowOpacity: 0.25
@@ -79,7 +75,7 @@ const styles = StyleSheet.create({
     width: 50,
     fontSize: 32,
     borderBottomColor: Colors.accent500,
-    borderBottomColor: 2,
+    borderBottomWidth: 2,
     color: Colors.accent500,
     marginVertical: 8,
     fontWeight: 'bold',
